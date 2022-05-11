@@ -1,0 +1,86 @@
+<div class="container">
+    <!-- start nav -->
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Students List</span>
+            <!-- start edit modal -->
+            <!-- Button trigger modal -->
+
+        </div>
+    </nav>
+    <!-- end nav -->
+    <button type="button" class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        (click)="handleButtonsShow()">
+        Add Student
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]='formValue'>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1"
+                                aria-describedby="emailHelp" formControlName="email">
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Student name</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1"
+                                formControlName="username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="phone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">ImgUrl</label>
+                            <input type="text" class="form-control" id="exampleInputPassword1" formControlName="img">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel"
+                        (click)="closeAtuomatic()">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addStudentData()"
+                        [disabled]="formValue.invalid" *ngIf="showAdd">ADD</button>
+                    <button type="button" class="btn btn-primary" *ngIf="showUpdate"
+                        (click)=" updataStudentInfo()">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end edit modal -->
+    <!-- start dropdown List -->
+
+    <!-- end dropdown List -->
+    <!-- start card -->
+    <div class="row">
+        <div class="card col-lg-3 m-2" *ngFor="let i of studentData">
+            <img [src]="i.imgUrl" class="card-img-top" alt="..." width="100%" height="200px">
+            <div class="card-body">
+
+                <div class="col-lg-10"> <a class="col-lg-10" [routerLink]="['/students',i.id]">{{i.username}}</a></div>
+
+                <button (click)="fillData(i)" type="button" class="btn btn-primary col-lg-10 mt-2"
+                    data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Edit
+                </button>
+                <button type="button" class="btn btn-danger  mt-2 col-lg-10"
+                    (click)="deleteStudentData(i)">Delete</button>
+                <!-- start delete model -->
+
+                <!-- end delete model -->
+            </div>
+        </div>
+    </div>
+    <!-- end card -->
+</div>
